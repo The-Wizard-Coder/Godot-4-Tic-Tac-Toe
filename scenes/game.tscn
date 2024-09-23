@@ -1,0 +1,102 @@
+[gd_scene load_steps=2 format=3 uid="uid://djwgqdrofpoy3"]
+
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_arixi"]
+
+[node name="Game" type="Node2D"]
+position = Vector2(37, 344)
+script = ExtResource("1_arixi")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+offset_left = 72.0
+offset_top = -247.0
+offset_right = 620.0
+offset_bottom = 310.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="Button" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button2" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button3" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button4" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button5" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button6" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button7" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button8" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Button9" type="Button" parent="GridContainer"]
+custom_minimum_size = Vector2(180, 180)
+layout_mode = 2
+theme_override_font_sizes/font_size = 128
+text = "   "
+
+[node name="Win Screen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = -38.0
+offset_top = -347.0
+offset_right = 722.0
+offset_bottom = 416.0
+grow_horizontal = 2
+
+[node name="Play Button" type="Button" parent="Win Screen"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 293.0
+offset_right = 429.0
+offset_bottom = 373.0
+theme_override_colors/font_color = Color(0.305882, 0.572549, 1, 1)
+theme_override_font_sizes/font_size = 52
+text = "Play"
+
+[node name="WinLabel" type="Label" parent="Win Screen"]
+layout_mode = 0
+offset_top = 148.0
+offset_right = 762.0
+offset_bottom = 217.0
+theme_override_colors/font_color = Color(0.93226, 0.786022, 0.16816, 1)
+theme_override_font_sizes/font_size = 50
+text = "You Won!"
+horizontal_alignment = 1
+
+[connection signal="pressed" from="Win Screen/Play Button" to="." method="_on_play_button_pressed"]
