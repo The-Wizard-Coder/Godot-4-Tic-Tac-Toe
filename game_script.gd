@@ -1,30 +1,38 @@
 extends Node2D
 
-const CELL_EMPTY = "   "
-const CELL_X = " X "
-const CELL_O = " O "
+# Different Board States
+const CELL_EMPTY = ""
+const CELL_X = "X"
+const CELL_O = "O"
 
 @onready var win_label = $"Win Screen/WinLabel"
+@onready var buttons = $GridContainer.get_children()
 
 # Variables for the board state
-var board = [
-	[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
-	[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
-	[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
-]
+var board
 
 # Keeps track of the current player ('X' or 'O')
-var current_player = CELL_X
+var current_player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Clear Win Label Message 
 	win_label.text = ""
-	for button in $GridContainer.get_children():
-		button.connect("pressed", _on_button_pressed.bind(button))
+	
+	var idx = 0
+	
+	# Add click actions to button
+	for button in buttons:
+		button.connect("pressed", _on_button_pressed.bind(idx, button))
+		idx += 1
+	# Reset Game Board
+	reset_game()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _on_button_pressed(button):
-	var index = get_index_from_button(button)
+func _on_button_pressed(idx, button):
+	# Infer position of button in grid
+	var index = Vector2(idx % 3, idx / 3)
+
 	if board[index.x][index.y] == CELL_EMPTY:
 		board[index.x][index.y] = current_player
 		button.text = current_player
@@ -37,10 +45,6 @@ func _on_button_pressed(button):
 			reset_game()
 		else:
 			current_player = CELL_O if (current_player == CELL_X) else CELL_X
-
-func get_index_from_button(button):
-	var idx = $GridContainer.get_children().find(button)
-	return Vector2(idx % 3, idx / 3)
 
 # Check for a win
 func check_win_condition():
@@ -74,7 +78,7 @@ func reset_game():
 		[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
 		[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
 	]
-	for button in $GridContainer.get_children():
+	for button in buttons:
 		button.text = CELL_EMPTY
 		button.disabled = false
 	current_player = CELL_X

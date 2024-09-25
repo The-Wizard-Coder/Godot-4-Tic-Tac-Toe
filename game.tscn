@@ -1,16 +1,16 @@
 [gd_scene load_steps=2 format=3 uid="uid://djwgqdrofpoy3"]
 
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_arixi"]
+[ext_resource type="Script" path="res://game_script.gd" id="1_xpmer"]
 
 [node name="Game" type="Node2D"]
 position = Vector2(37, 344)
-script = ExtResource("1_arixi")
+script = ExtResource("1_xpmer")
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 72.0
-offset_top = -247.0
-offset_right = 620.0
-offset_bottom = 310.0
+offset_left = 70.0
+offset_top = -240.0
+offset_right = 618.0
+offset_bottom = 317.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 columns = 3
@@ -70,6 +70,7 @@ theme_override_font_sizes/font_size = 128
 text = "   "
 
 [node name="Win Screen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 10
 anchor_right = 1.0
@@ -79,12 +80,27 @@ offset_right = 722.0
 offset_bottom = 416.0
 grow_horizontal = 2
 
+[node name="Background" type="ColorRect" parent="Win Screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="Play Button" type="Button" parent="Win Screen"]
-layout_mode = 0
-offset_left = 316.0
-offset_top = 293.0
-offset_right = 429.0
-offset_bottom = 373.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -40.0
+offset_right = 82.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0.305882, 0.572549, 1, 1)
 theme_override_font_sizes/font_size = 52
 text = "Play"
