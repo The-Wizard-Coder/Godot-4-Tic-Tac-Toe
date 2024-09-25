@@ -1,118 +1,112 @@
-[gd_scene load_steps=2 format=3 uid="uid://djwgqdrofpoy3"]
+[gd_scene load_steps=2 format=3 uid="uid://jxtx7a3psfmm"]
 
-[ext_resource type="Script" path="res://game_script.gd" id="1_xpmer"]
+[ext_resource type="Script" path="res://game_script.gd" id="1_8rval"]
 
 [node name="Game" type="Node2D"]
-position = Vector2(37, 344)
-script = ExtResource("1_xpmer")
+script = ExtResource("1_8rval")
 
 [node name="GridContainer" type="GridContainer" parent="."]
-offset_left = 70.0
-offset_top = -240.0
-offset_right = 618.0
-offset_bottom = 317.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
+offset_left = 90.0
+offset_top = 90.0
+offset_right = 638.0
+offset_bottom = 638.0
 columns = 3
 
 [node name="Button" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button2" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button3" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button4" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button5" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button6" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button7" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button8" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
 [node name="Button9" type="Button" parent="GridContainer"]
 custom_minimum_size = Vector2(180, 180)
 layout_mode = 2
-theme_override_font_sizes/font_size = 128
-text = "   "
+theme_override_font_sizes/font_size = 100
 
-[node name="Win Screen" type="Control" parent="."]
-visible = false
+[node name="Menu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = -38.0
-offset_top = -347.0
-offset_right = 722.0
-offset_bottom = 416.0
-grow_horizontal = 2
-
-[node name="Background" type="ColorRect" parent="Win Screen"]
-layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Play Button" type="Button" parent="Win Screen"]
+[node name="ColorRect" type="ColorRect" parent="Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 723.0
+offset_bottom = 723.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Button" type="Button" parent="Menu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -82.0
-offset_top = -40.0
-offset_right = 82.0
-offset_bottom = 40.0
+offset_left = 279.0
+offset_top = 309.0
+offset_right = 445.0
+offset_bottom = 362.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(0.305882, 0.572549, 1, 1)
+theme_override_colors/font_color = Color(0.754947, 0.837007, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Play 1 vs 1"
+
+[node name="Label" type="Label" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 251.0
+offset_top = 197.0
+offset_right = 475.0
+offset_bottom = 269.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 52
-text = "Play"
+text = "You Won"
 
-[node name="WinLabel" type="Label" parent="Win Screen"]
-layout_mode = 0
-offset_top = 148.0
-offset_right = 762.0
-offset_bottom = 217.0
-theme_override_colors/font_color = Color(0.93226, 0.786022, 0.16816, 1)
-theme_override_font_sizes/font_size = 50
-text = "You Won!"
-horizontal_alignment = 1
-
-[connection signal="pressed" from="Win Screen/Play Button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="Menu/Button" to="." method="_on_button_pressed"]

@@ -1,89 +1,86 @@
 extends Node2D
 
-# Different Board States
+# Cell States
 const CELL_EMPTY = ""
 const CELL_X = "X"
 const CELL_O = "O"
 
-@onready var win_label = $"Win Screen/WinLabel"
 @onready var buttons = $GridContainer.get_children()
+@onready var label = $Menu/Label
+@onready var menu = $Menu
 
-# Variables for the board state
-var board
-
-# Keeps track of the current player ('X' or 'O')
+# Game States
 var current_player
+var board
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	# Clear Win Label Message 
-	win_label.text = ""
-	
-	var idx = 0
-	
-	# Add click actions to button
+	label.text = ""
+	var button_index = 0
 	for button in buttons:
-		button.connect("pressed", _on_button_pressed.bind(idx, button))
-		idx += 1
-	# Reset Game Board
+		button.connect("pressed", _on_button_click.bind(button_index, button))
+		button_index += 1
 	reset_game()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _on_button_pressed(idx, button):
-	# Infer position of button in grid
-	var index = Vector2(idx % 3, idx / 3)
+func _on_button_click(idx, button):
+	# Translating index position to (X, Y) Position.
+	var y = idx / 3
+	var x = idx % 3
 
-	if board[index.x][index.y] == CELL_EMPTY:
-		board[index.x][index.y] = current_player
-		button.text = current_player
-		button.disabled = true
-		if check_win_condition():
-			win_label.text = ("Player 1 (X)" if current_player == CELL_X else "Player 2 (O)") + " wins!"
+	button.text = current_player
+	if board[x][y] == CELL_EMPTY:
+		board[x][y] = current_player
+		
+		# Check Win Conditions
+		if check_win():
+			label.text = current_player + " has won!"
 			reset_game()
-		elif is_board_full():
-			win_label.text = "It's a draw!"
+		elif check_fullboard():
+			# draw
+			label.text = "It's a Draw!"
 			reset_game()
 		else:
-			current_player = CELL_O if (current_player == CELL_X) else CELL_X
+			current_player = CELL_X if current_player == CELL_O else CELL_O
 
-# Check for a win
-func check_win_condition():
+
+func check_win():
+	# Check horizontally/vertically if all the cells are set to same state
 	for i in range(3):
-		# Check rows and columns
-		if board[i][0] == board[i][1] and board[i][1] == board[i][2] and board[i][1] != CELL_EMPTY:
+		if board[i][0] == board[i][1] and  board[i][1] == board[i][2] and board[i][2] != CELL_EMPTY:
 			return true
-		if board[0][i] == board[1][i] and board[1][i] == board[2][i] and board[1][i] != CELL_EMPTY:
+		if board[0][i] == board[1][i] and  board[1][i] == board[2][i] and board[2][i] != CELL_EMPTY:
 			return true
-
-	# Check diagonals
-	if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[1][1] != CELL_EMPTY:
+	
+	# Check diagonally for wins
+	if board[0][0] == board[1][1] and board[1][1] == board[2][2] and board[2][2] != CELL_EMPTY:
 		return true
-	if board[0][2] == board[1][1] and board[1][1] == board[2][0] and board[1][1] != CELL_EMPTY:
+	if board[2][0] == board[1][1] and board[1][1] == board[0][2] and board[0][2] != CELL_EMPTY:
 		return true
-
+	
 	return false
+	
 
-# Check if all the cells are filled
-func is_board_full():
+func check_fullboard():
 	for row in board:
-		for cell in row:
-			if cell == CELL_EMPTY:
+		for col in row:
+			if col == CELL_EMPTY:
 				return false
 	return true
 
-# Reset the game
 func reset_game():
+	current_player = CELL_X
 	board = [
-		[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
-		[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
-		[CELL_EMPTY, CELL_EMPTY, CELL_EMPTY],
+		[CELL_EMPTY,CELL_EMPTY,CELL_EMPTY],
+		[CELL_EMPTY,CELL_EMPTY,CELL_EMPTY],
+		[CELL_EMPTY,CELL_EMPTY,CELL_EMPTY],
 	]
 	for button in buttons:
 		button.text = CELL_EMPTY
-		button.disabled = false
-	current_player = CELL_X
-	$"Win Screen".show()
+	menu.show()
 
-func _on_play_button_pressed():
-	$"Win Screen".hide()
-	win_label.text = ""
+func _on_button_pressed():
+	# Start game when clicked on play
+	label.text = ""
+	menu.hide()
+	
+	

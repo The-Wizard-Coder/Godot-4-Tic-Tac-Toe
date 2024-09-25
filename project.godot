@@ -17,10 +17,10 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=760
-window/size/viewport_height=760
+window/size/viewport_width=720
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
 
 [rendering]
 
-environment/defaults/default_clear_color=Color(0.913725, 0.427451, 0.427451, 1)
+environment/defaults/default_clear_color=Color(0.950376, 0.415224, 0.397745, 1)
